@@ -13,8 +13,8 @@ project 1 - A Random Quote Generator
 
 let quotes = [
   {
-    quote: "Do. Or do not.There is no try.",
-    source: "- Yoda",
+    quote: "Do. Or do not. There is no try.",
+    source: "Yoda",
     citation:
       "Twentieth Century Fox",
     year: "1977",
@@ -22,21 +22,24 @@ let quotes = [
   },
   {
     quote: "You cannot plan the future by the past.",
-    source: "- Edmund Burke"
+    source: "Edmund Burke",
+    citation: "British State",
+    year: "1782",
+    tags: "Historical"
   },
   {
     quote: "The shortest answer is doing.",
-    source: "- English Proverb"
+    source: "English Proverb"
   },
   {
     quote:
       "My doctor gave me six months to live, but when I couldn't pay the bill, he gave me six months more.",
-    source: "- Walter Mattbau"
+    source: "Walter Mattbau"
   },
   {
     quote:
       "Every stage of life has its troubles, and no man is content with his own age.",
-    source: "- Ausonius"
+    source: "Ausonius"
   }
 ];
 let colors = ["#041a7f", "#e05963", "#19d062", "#a04193", "#2ca67b"];
@@ -76,32 +79,34 @@ function printQuote() {
   let quoteObj = getRandomQuote();
   // Sanity check, make sure the quote object is being retrieved
   console.log(quoteObj);
-  // Create a div that
-  root.innerHTML = "<p class='quote'>" + quoteObj.quote + "</p>";
-  root.innerHTML += "<p class='source'>" + quoteObj.source;
+  // Create a string that gathers elements to print
+  let html = "<p class='quote'>" + quoteObj.quote + "</p>"
+  html += "<p class='source'>" + quoteObj.source;
   
-
-  // Check and see if the quoteObj has a citation if so, print it as well
+  // Check and see if the quoteObj has a citation, year, and tag if so, print it as well
   if (quoteObj.citation != null) {
-    root.innerHTML += "<span class='citation'>" + quoteObj.citation + " </span>";
-  }
-  // Check and see if the quoteObj has a year if so, print it as well
+    html += "<span class='citation'>" + quoteObj.citation + "</span>";
+  } 
   if (quoteObj.year != null) {
-    root.innerHTML += "<span class='year'>" + quoteObj.year + " </span>";
-  }
-  // Check and see if the quoteObj has a tags if so, print it as well
+    html += "<span class='year'>" + quoteObj.year + "</span>";
+  } 
+  // Close the paragraph and add tags on new line
+  html += "</p>";
   if (quoteObj.tags != null) {
-    root.innerHTML += "<i>" + quoteObj.tags + "</i>";
+    html += "<i class='tag'>" + quoteObj.tags + "</i>";
   }
+  html += "</div>";
+
+  // Final Print
+  root.innerHTML = html;
 }
 
-root.innerHTML += "+ </p></div>"
 
 
 
 // Call the printQuote function every 5 seconds
 // Will change bg color and quote regardless of button press
-setInterval(printQuote, 5000);
+// setInterval(printQuote, 5000);
 
 /***
  * click event listener for the print quote button

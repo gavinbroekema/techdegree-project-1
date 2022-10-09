@@ -3,10 +3,6 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
-// For assistance: 
-  // Check the "Project Resources" section of the project instructions
-  // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
-
 /*** 
  * `quotes` array 
 ***/
@@ -49,15 +45,27 @@ let root = document.getElementById("quote-box");
 
 /***
  * `getRandomQuote` function
+ * @returns {array} quote - returns object from quotes variable 
 ***/
 
+let lastIndex = 0;
 // Get a random quote and return the random quote object
 function getRandomQuote() {
+  // Check the current quote
   let rand = Math.floor(Math.random() * (quotes.length - 1)); // change to fit bg too
+  // Check if the current quote is equal to the random quote selected
+  while(rand === lastIndex) {
+    rand = Math.floor(Math.random() * (quotes.length - 1));
+  }
+  lastIndex = rand;
   return quotes[rand];
 }
 
-// Select a random background and change the background of the body element
+/***
+ * `changeBackground` function
+ *  Changes the background color of the body element
+***/
+
 function changeBackground() {
   let num = Math.floor(Math.random() * (colors.length - 1));
   console.log(num);
@@ -66,13 +74,10 @@ function changeBackground() {
 
 /***
  * `printQuote` function
+ *  Builds HTML string to display random quote on browser
 ***/
 
-// When called, changes the background color
-// Then puts together an innerHTML consisting of h1, p1, and possibly 3 i elements
-// The final innerHTML is sent to the root div element
 function printQuote() {
-  // Changes the background color
   changeBackground();
 
   // Get a random quote object from the getRandomQuote function
@@ -90,23 +95,19 @@ function printQuote() {
   if (quoteObj.year != null) {
     html += "<span class='year'>" + quoteObj.year + "</span>";
   } 
-  // Close the paragraph and add tags on new line
-  html += "</p>";
   if (quoteObj.tags != null) {
-    html += "<i class='tag'>" + quoteObj.tags + "</i>";
+    html += "<span class='tag'>" + quoteObj.tags + "</span>";
   }
-  html += "</div>";
+  html += "</p>";
 
   // Final Print
   root.innerHTML = html;
 }
 
 
-
-
 // Call the printQuote function every 5 seconds
 // Will change bg color and quote regardless of button press
-// setInterval(printQuote, 5000);
+setInterval(printQuote, 5000);
 
 /***
  * click event listener for the print quote button

@@ -116,15 +116,12 @@ h1 {
 }
 
 .tag {
-  display: block;
-  margin-right: 64px;
-  text-align: right;
+  font-style: italic;
 }
 
 .tag:before {
-  content: "+ ";
+  content: ", ";
   font-style: normal;
-  font-size: 1.5rem;
 }
 
 @media (min-width: 768px) {
